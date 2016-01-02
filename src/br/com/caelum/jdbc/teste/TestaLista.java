@@ -10,8 +10,9 @@ public class TestaLista {
 		
 		ContatoDao dao = new ContatoDao();
 		List<Contato> contatos = dao.getLista();
-		
+       
 		for (Contato contato : contatos) {
+			  System.out.println("ID: " + contato.getId());
 			  System.out.println("Nome: " + contato.getNome());
 			  System.out.println("Email: " + contato.getEmail());
 			  System.out.println("Endereço: " + contato.getEndereco());
@@ -19,7 +20,6 @@ public class TestaLista {
 			              contato.getDataNascimento().getTime() + "\n");
 			}
 		
-	
 	 }
 
 }
