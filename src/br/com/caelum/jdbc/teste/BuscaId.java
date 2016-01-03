@@ -4,17 +4,14 @@ import java.util.List;
 
 import br.com.caelum.jdbc.dao.ContatoDao;
 import br.com.caelum.jdbc.modelo.Contato;
-/** Exercício 2.13.2
- * 
- * @author marcos
- *
- */
-public class TestaLista {
+
+public class BuscaId {
 	public static void main(String[] args) {
 		
 		ContatoDao dao = new ContatoDao();
-		List<Contato> contatos = dao.getLista();
-       
+		List<Contato> contatos = dao.getListaId(10);
+		
+			
 		for (Contato contato : contatos) {
 			  System.out.println("ID: " + contato.getId());
 			  System.out.println("Nome: " + contato.getNome());

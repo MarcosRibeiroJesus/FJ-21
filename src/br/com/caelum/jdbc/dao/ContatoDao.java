@@ -11,7 +11,11 @@ import java.util.List;
 
 import br.com.caelum.jdbc.ConnectionFactory;
 import br.com.caelum.jdbc.modelo.Contato;
-
+/**Classe Responsável por gerenciar a  conexão com o banco de dados
+ * 
+ * @author marcos
+ *
+ */
 public class ContatoDao {
 
 	private Connection connection;
@@ -103,7 +107,7 @@ public class ContatoDao {
 
 	 }
 
-	
+	// Exercício 2.13.1
 	public List<Contato> getLista(){
 		try {
 			List<Contato> contatos = new ArrayList<>();
@@ -133,6 +137,70 @@ public class ContatoDao {
 		} catch (SQLException e) {
 		
 			throw new DAOException("Ocorreu um erro ao listar contatos!");
+		}
+	}
+	//
+	public List<Contato> getListaId(int id){
+		try {
+			List<Contato> contatos = new ArrayList<>();
+			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where id =" + id);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				// criando o objeto Contato
+				Contato contato = new Contato();
+				contato.setId(rs.getInt("id"));
+				contato.setNome(rs.getString("nome"));
+				contato.setEmail(rs.getString("email"));
+				contato.setEndereco(rs.getString("endereco"));
+				 
+				// montando a data através do Calendar
+				Calendar data = Calendar.getInstance();
+				
+				data.setTime(rs.getDate("dataNascimento"));
+				
+				contato.setDataNascimento(data);
+				
+			// adicionando o objeto à lista
+				contatos.add(contato);
+			}
+			rs.close();
+			stmt.close();
+			return contatos;
+		} catch (SQLException message) {
+		
+			throw new DAOException("Ocorreu um erro ao buscar a ID especificada!");
+		}
+	}
+	
+	public List<Contato> getListaNome(String nome){
+		try {
+			List<Contato> contatos = new ArrayList<>();
+			PreparedStatement stmt = this.connection.prepareStatement("select from contatos WHERE nome=?"+nome);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				// criando o objeto Contato
+				Contato contato = new Contato();
+				contato.setId(rs.getInt("id"));
+				contato.setNome(rs.getString("nome"));
+				contato.setEmail(rs.getString("email"));
+				contato.setEndereco(rs.getString("endereco"));
+				 
+				// montando a data através do Calendar
+				Calendar data = Calendar.getInstance();
+				
+				data.setTime(rs.getDate("dataNascimento"));
+				
+				contato.setDataNascimento(data);
+				
+			// adicionando o objeto à lista
+				contatos.add(contato);
+			}
+			rs.close();
+			stmt.close();
+			return contatos;
+		} catch (SQLException message) {
+		
+			throw new DAOException("Nome não encontrado!");
 		}
 	}
 }

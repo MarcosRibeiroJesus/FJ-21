@@ -11,10 +11,9 @@ public class TesteInsere {
 
 		// pronto para gravar
 		Contato contato = new Contato();
-		contato.setNome("Celina");
-
-		contato.setEmail("contato@celina.com.br");
-		contato.setEndereco("Rua 12 Casa 12");
+		contato.setNome("Koopsta");
+		contato.setEmail("Knicka@gmail.com.br");
+		contato.setEndereco("Rua 88 Casa 88");
 		contato.setDataNascimento(Calendar.getInstance());
 
 		// grave nessa conexão!!!

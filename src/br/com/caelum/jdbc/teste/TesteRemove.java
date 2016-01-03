@@ -1,10 +1,12 @@
 package br.com.caelum.jdbc.teste;
 
-import java.util.List;
-
 import br.com.caelum.jdbc.dao.*;
 import br.com.caelum.jdbc.modelo.Contato;
-
+/**
+ * Classe para teste de remoção
+ * @author marcos
+ *
+ */
 public class TesteRemove {
 
 	public static void main(String[] args) {

@@ -3,7 +3,11 @@ package br.com.caelum.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+/**
+ * Classe Responsável por abrir uma conexão como o BD
+ * @author marcos
+ *
+ */
 public class ConnectionFactory {
 
 	public Connection getConnection(){

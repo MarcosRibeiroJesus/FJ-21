@@ -1,7 +1,11 @@
 package br.com.caelum.jdbc.modelo;
 
 import java.util.Calendar;
-
+/**
+ * Classe Contato é o nosso JavaBean
+ * @author marcos
+ *
+ */
 public class Contato {
 	private int id;
 	private String nome;
