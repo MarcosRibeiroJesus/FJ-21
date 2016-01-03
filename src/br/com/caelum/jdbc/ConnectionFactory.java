@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 /**
  * Classe Responsável por abrir uma conexão como o BD
- * @author marcos
+ * @author Marcos
  *
  */
 public class ConnectionFactory {
