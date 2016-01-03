@@ -13,9 +13,9 @@ import br.com.caelum.jdbc.ConnectionFactory;
 import br.com.caelum.jdbc.modelo.Contato;
 
 /**
- * Classe Responsável por gerenciar a conexão com o banco de dados
+ * Classe Responsável por gerenciar as solicitações no o banco de dados
  * 
- * @author marcos
+ * @author Marcos
  *
  */
 public class ContatoDao {
@@ -34,7 +34,6 @@ public class ContatoDao {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			// seta os valores
-
 			stmt.setString(1, contato.getNome());
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
@@ -116,7 +115,7 @@ public class ContatoDao {
 			while (rs.next()) {
 				// criando o objeto Contato
 				Contato contato = new Contato();
-				contato.setId(rs.getInt("id"));
+				contato.setId(rs.getLong("id"));
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
@@ -140,7 +139,7 @@ public class ContatoDao {
 		}
 	}
 
-	//
+	// Busca por id
 	public List<Contato> getListaId(int id) {
 		try {
 			List<Contato> contatos = new ArrayList<>();
@@ -149,7 +148,7 @@ public class ContatoDao {
 			while (rs.next()) {
 				// criando o objeto Contato
 				Contato contato = new Contato();
-				contato.setId(rs.getInt("id"));
+				contato.setId(rs.getLong("id"));
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
@@ -173,15 +172,16 @@ public class ContatoDao {
 		}
 	}
 
-	public List<Contato> getListaNome(String busca) {
+	public List<Contato> getListaNome(String busca) {// Não funciona
 		try {
 			List<Contato> contatos = new ArrayList<>();
-			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos WHERE nome=?" + busca);
+			PreparedStatement stmt = this.connection
+					.prepareStatement("select * from contatos WHERE nome ='" + busca + "%'");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				// criando o objeto Contato
 				Contato contato = new Contato();
-				contato.setId(rs.getInt("id"));
+				contato.setId(rs.getLong("id"));
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));

@@ -49,17 +49,21 @@ public class TesteInsere {
 		System.out.println("Gravado novo cadastro: " + funcionario.getNome() + "\n" 
 													+ funcionario2.getNome() + "\n");
 
-		/*
-		 * // pronto para gravar Contato contato = new Contato();
-		 * contato.setNome("Koopsta"); contato.setEmail("Knicka@gmail.com.br");
-		 * contato.setEndereco("Rua 88 Casa 88");
-		 * contato.setDataNascimento(Calendar.getInstance());
-		 * 
-		 * // grave nessa conexão!!! ContatoDao dao = new ContatoDao();
-		 * 
-		 * // método elegante dao.adiciona(contato);
-		 * 
-		 * System.out.println("Gravado novo cadastro: " + contato.getNome());
-		 */
+		
+		  // pronto para gravar 
+		  Contato contato = new Contato();
+		  contato.setId(5L);
+		  contato.setNome("Mônica"); contato.setEmail("monica@gmail.com.br");
+		  contato.setEndereco("Rua 88 Casa 88");
+		  contato.setDataNascimento(Calendar.getInstance());
+		  
+		  // grave nessa conexão!!! 
+		  ContatoDao c = new ContatoDao();
+		  
+		  // método elegante 
+		  c.adiciona(contato);
+		 
+		  System.out.println("Gravado novo cadastro: " + contato.getNome());
+		 
 	}
 }

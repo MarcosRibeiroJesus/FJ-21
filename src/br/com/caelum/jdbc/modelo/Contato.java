@@ -7,7 +7,7 @@ import java.util.Calendar;
  *
  */
 public class Contato {
-	private int id;
+	private Long id;
 	private String nome;
 	private String email;
 	private String endereco;
@@ -15,10 +15,10 @@ public class Contato {
 	
 	
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {

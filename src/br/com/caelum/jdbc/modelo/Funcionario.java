@@ -1,5 +1,9 @@
 package br.com.caelum.jdbc.modelo;
-
+/**
+ * Classe Funcionário
+ * @author Marcos
+ *
+ */
 public class Funcionario {
 
 	private String nome;

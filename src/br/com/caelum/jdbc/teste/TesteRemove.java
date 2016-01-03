@@ -16,7 +16,7 @@ public class TesteRemove {
 		Contato contato = new Contato();
 		ContatoDao dao = new ContatoDao();
 
-		contato.setId(5);// setando a id a ser apagada
+		contato.setId(7L);// setando a id a ser apagada
 
 		dao.remove(contato);
 

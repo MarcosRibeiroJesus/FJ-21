@@ -10,7 +10,7 @@ public class BuscaId {
 	public static void main(String[] args) {
 
 		ContatoDao dao = new ContatoDao();
-		List<Contato> contatos = dao.getListaId(1);
+		List<Contato> contatos = dao.getListaId(9);
 
 		for (Contato contato : contatos) {
 			System.out.println("ID: " + contato.getId());

@@ -4,13 +4,14 @@ import java.util.List;
 import br.com.caelum.jdbc.dao.ContatoDao;
 import br.com.caelum.jdbc.modelo.Contato;
 
-public class BuscaNome {
+public class BuscaNome {// Não Funciona
 	public static void main(String[] args) {
 		
-		
+		//Não funciona
 		ContatoDao dao = new ContatoDao();
 
-		List<Contato> contatos = dao.getListaNome("Marcos");
+		String busca = "M";
+		List<Contato> contatos = dao.getListaNome(busca);
 		
 			
 		for (Contato contato : contatos) {
