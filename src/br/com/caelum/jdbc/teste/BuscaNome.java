@@ -7,7 +7,9 @@ import br.com.caelum.jdbc.modelo.Contato;
 public class BuscaNome {
 	public static void main(String[] args) {
 		
+		
 		ContatoDao dao = new ContatoDao();
+
 		List<Contato> contatos = dao.getListaNome("Marcos");
 		
 			

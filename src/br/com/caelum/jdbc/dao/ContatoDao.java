@@ -11,7 +11,9 @@ import java.util.List;
 
 import br.com.caelum.jdbc.ConnectionFactory;
 import br.com.caelum.jdbc.modelo.Contato;
-/**Classe Responsável por gerenciar a  conexão com o banco de dados
+
+/**
+ * Classe Responsável por gerenciar a conexão com o banco de dados
  * 
  * @author marcos
  *
@@ -46,69 +48,67 @@ public class ContatoDao {
 			throw new DAOException("Ocorreu um erro ao adicionar um contato!");
 		}
 	}
-	
+
 	public void altera(Contato contato) {
 
-	     String sql = "update contatos set nome=?, email=?,"+
+		String sql = "update contatos set nome=?, email=?," +
 
-	             "endereco=?, dataNascimento=? where id=?";
+		"endereco=?, dataNascimento=? where id=?";
 
-	 
+		try {
 
-	     try {
+			PreparedStatement stmt = connection
 
-	         PreparedStatement stmt = connection
+					.prepareStatement(sql);
 
-	                 .prepareStatement(sql);
+			stmt.setString(1, contato.getNome());
 
-	         stmt.setString(1, contato.getNome());
+			stmt.setString(2, contato.getEmail());
 
-	         stmt.setString(2, contato.getEmail());
+			stmt.setString(3, contato.getEndereco());
 
-	         stmt.setString(3, contato.getEndereco());
+			stmt.setDate(4, new Date(contato.getDataNascimento()
 
-	         stmt.setDate(4, new Date(contato.getDataNascimento()
+					.getTimeInMillis()));
 
-	                 .getTimeInMillis()));
+			stmt.setLong(5, contato.getId());
 
-	         stmt.setLong(5, contato.getId());
+			stmt.execute();
 
-	         stmt.execute();
+			stmt.close();
 
-	         stmt.close();
+		} catch (SQLException e) {
 
-	     } catch (SQLException e) {
+			throw new DAOException("Erro ao alterar contato!");
 
-	         throw new DAOException("Erro ao alterar contato!");
+		}
 
-	     }
+	}
 
-	 }
-	
-	 public void remove(Contato contato) {
+	public void remove(Contato contato) {
 
-	     try {
+		try {
 
-	         PreparedStatement stmt = connection
+			PreparedStatement stmt = connection
 
-	                 .prepareStatement("delete from contatos where id=?");
+					.prepareStatement("delete from contatos where id=?");
 
-	         stmt.setLong(1, contato.getId());
+			stmt.setLong(1, contato.getId());
 
-	         stmt.execute();
+			stmt.execute();
 
-	         stmt.close();
+			stmt.close();
 
-	     } catch (SQLException e) {
+		} catch (SQLException e) {
 
-	         throw new DAOException("Erro ao remover contato!");
+			throw new DAOException("Erro ao remover contato!");
 
-	     }
+		}
 
-	 }
+	}
 
 	// Exercício 2.13.1
-	public List<Contato> getLista(){
+	public List<Contato> getLista() {
 		try {
 			List<Contato> contatos = new ArrayList<>();
 			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos");
@@ -120,27 +120,28 @@ public class ContatoDao {
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
-				 
+
 				// montando a data através do Calendar
 				Calendar data = Calendar.getInstance();
-				
+
 				data.setTime(rs.getDate("dataNascimento"));
-				
+
 				contato.setDataNascimento(data);
-				
-			// adicionando o objeto à lista
+
+				// adicionando o objeto à lista
 				contatos.add(contato);
 			}
 			rs.close();
 			stmt.close();
 			return contatos;
 		} catch (SQLException e) {
-		
+
 			throw new DAOException("Ocorreu um erro ao listar contatos!");
 		}
 	}
+
 	//
-	public List<Contato> getListaId(int id){
+	public List<Contato> getListaId(int id) {
 		try {
 			List<Contato> contatos = new ArrayList<>();
 			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where id =" + id);
@@ -152,30 +153,30 @@ public class ContatoDao {
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
-				 
+
 				// montando a data através do Calendar
 				Calendar data = Calendar.getInstance();
-				
+
 				data.setTime(rs.getDate("dataNascimento"));
-				
+
 				contato.setDataNascimento(data);
-				
-			// adicionando o objeto à lista
+
+				// adicionando o objeto à lista
 				contatos.add(contato);
 			}
 			rs.close();
 			stmt.close();
 			return contatos;
 		} catch (SQLException message) {
-		
+
 			throw new DAOException("Ocorreu um erro ao buscar a ID especificada!");
 		}
 	}
-	
-	public List<Contato> getListaNome(String nome){
+
+	public List<Contato> getListaNome(String busca) {
 		try {
 			List<Contato> contatos = new ArrayList<>();
-			PreparedStatement stmt = this.connection.prepareStatement("select from contatos WHERE nome=?"+nome);
+			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos WHERE nome=?" + busca);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				// criando o objeto Contato
@@ -184,22 +185,22 @@ public class ContatoDao {
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
-				 
+
 				// montando a data através do Calendar
 				Calendar data = Calendar.getInstance();
-				
+
 				data.setTime(rs.getDate("dataNascimento"));
-				
+
 				contato.setDataNascimento(data);
-				
-			// adicionando o objeto à lista
+
+				// adicionando o objeto à lista
 				contatos.add(contato);
 			}
 			rs.close();
 			stmt.close();
 			return contatos;
 		} catch (SQLException message) {
-		
+
 			throw new DAOException("Nome não encontrado!");
 		}
 	}
